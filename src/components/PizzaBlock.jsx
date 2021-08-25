@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import classnames from 'classnames';
 import { Button } from './importComponents';
 
-const PizzaBlock = () => {
+const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
+    const typesArray = ['Тонкое', 'Традиционное'];
+    const sizesArray = [26, 30, 40];
+    const [typeActive, setTypeActive] = useState(types[0]);
+    const [sizeActive, setSizeActive] = useState(sizesArray.findIndex(size => size === sizes[0]));
+
+    const onSelectType = (index) => {
+        setTypeActive(index)
+    };
+
+    const onSelectSize = (index) => {
+        setSizeActive(index);
+    };
+
     return (
         <div className="pizza-block">
             <img
@@ -12,17 +26,36 @@ const PizzaBlock = () => {
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    <li className="active">тонкое</li>
-                    <li>традиционное</li>
+                    {
+                        typesArray.map((type, index) => 
+                        <li 
+                            key={`type_${index}`}
+                            onClick={() => onSelectType(index)}
+                            className={classnames({
+                                'active': typeActive === index,
+                                'disabled': !types.includes(index)
+                            })}>
+                            {type}
+                        </li>)
+                    }
                 </ul>
                 <ul>
-                    <li className="active">26 см.</li>
-                    <li>30 см.</li>
-                    <li>40 см.</li>
+                    {
+                        sizesArray.map((size, index) => 
+                        <li 
+                            key={`size_${index}`}
+                            onClick={() => onSelectSize(index)}
+                            className={classnames({
+                                'active': sizeActive === index,
+                                'disabled': !sizes.includes(size)
+                            })}>
+                            {size}
+                        </li>)
+                    }
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от 395 ₽</div>
+                <div className="pizza-block__price">от {price} ₽</div>
                 <Button outline add>
                     <svg
                         width="12"
