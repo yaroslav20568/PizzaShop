@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PizzaLogo from './../assets/img/pizza-logo.svg';
 import { Button } from './importComponents';
 
-function Header() {
+const Header = () => {
     return (
         <div className="header">
             <div className="container">

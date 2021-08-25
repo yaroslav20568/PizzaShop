@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './../components/importComponents';
 
-function Cart() {
+const Cart = () => {
     return (
         <div className="container container--cart">
             <div className="cart">

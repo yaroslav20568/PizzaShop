@@ -1,7 +1,7 @@
 import React from 'react';
 import Img from './../assets/img/empty-cart.png';
 
-function EmptyCard() {
+const EmptyCard = () => {
     return (
         <div className="container container--cart">
             <div className="cart cart--empty">

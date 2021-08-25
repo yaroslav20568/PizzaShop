@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SortPopup() {
+const SortPopup = () => {
     return (
         <div className="sort">
             <div className="sort__label">

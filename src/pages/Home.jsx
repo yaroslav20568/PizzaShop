@@ -1,7 +1,19 @@
-import React from 'react';
-import { Categories, SortPopup, PizzaBlock } from './../components/importComponents';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPizzas } from './../redux/actions/pizzas';
+import { Categories, SortPopup, PizzaBlock, PizzaLoader } from './../components/importComponents';
 
-function Home() {
+const Home = () => {
+    const { pizzas, isLoaded } = useSelector(({ pizzas, isLoaded }) => ({
+        pizzas: pizzas.pizzas,
+        isLoaded: pizzas.isLoaded
+    }));
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchPizzas());
+    }, []);
+
     return (
         <div className="container">
             <div className="content__top">

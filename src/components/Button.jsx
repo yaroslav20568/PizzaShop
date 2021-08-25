@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-function Button({ children, cart, outline, add, back, pay, circle, minus, plus }) {
+const Button = ({ children, cart, outline, add, back, pay, circle, minus, plus }) => {
     const btnClasses = classnames({
         'button--cart': cart,
         'button--outline': outline,

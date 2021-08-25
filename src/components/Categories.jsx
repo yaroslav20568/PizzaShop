@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Categories() {
+const Categories = () => {
     return (
         <div className="categories">
             <ul>

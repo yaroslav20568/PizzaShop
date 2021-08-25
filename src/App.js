@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Header } from './components/importComponents';
-import { Home, Cart, EmptyCart, PageNotFound } from './pages/importPages';
+import { Home, Cart, PageNotFound } from './pages/importPages';
 
 function App() {
     return (
@@ -11,8 +11,7 @@ function App() {
                 <Switch>
                     <Route path="/" component={ Home } exact />
                     <Route path="/cart" component={ Cart } exact />
-                    <Route path="/emptycart" component={ EmptyCart } exact />
-                    <Route path="/pagenotfound" component={ PageNotFound } exact />
+                    <Route component={ PageNotFound } exact />
                 </Switch>
             </div>
         </div>
