@@ -5,15 +5,15 @@ import { Button } from './importComponents';
 const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
     const typesArray = ['Тонкое', 'Традиционное'];
     const sizesArray = [26, 30, 40];
-    const [typeActive, setTypeActive] = useState(types[0]);
-    const [sizeActive, setSizeActive] = useState(sizesArray.findIndex(size => size === sizes[0]));
+    const [activeType, setActiveType] = useState(types[0]);
+    const [activeSize, setActiveSize] = useState(sizesArray.findIndex(size => size === sizes[0]));
 
-    const onSelectType = (index) => {
-        setTypeActive(index)
+    const onSelectType = index => {
+        setActiveType(index);
     };
 
-    const onSelectSize = (index) => {
-        setSizeActive(index);
+    const onSelectSize = index => {
+        setActiveSize(index);
     };
 
     return (
@@ -32,9 +32,10 @@ const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
                             key={`type_${index}`}
                             onClick={() => onSelectType(index)}
                             className={classnames({
-                                'active': typeActive === index,
+                                'active': activeType === index,
                                 'disabled': !types.includes(index)
-                            })}>
+                            })}
+                        >
                             {type}
                         </li>)
                     }
@@ -46,10 +47,11 @@ const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
                             key={`size_${index}`}
                             onClick={() => onSelectSize(index)}
                             className={classnames({
-                                'active': sizeActive === index,
+                                'active': activeSize === index,
                                 'disabled': !sizes.includes(size)
-                            })}>
-                            {size}
+                            })}
+                        >
+                            {size} см.
                         </li>)
                     }
                 </ul>
