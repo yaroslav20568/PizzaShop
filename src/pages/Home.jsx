@@ -1,7 +1,5 @@
 import React from 'react';
-import Categories from '../components/Categories';
-import SortPopup from '../components/SortPopup';
-import PizzaBlock from './../components/PizzaBlock';
+import { Categories, SortPopup, PizzaBlock } from './../components/importComponents';
 
 function Home() {
     return (

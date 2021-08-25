@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from './importComponents';
 
 function PizzaBlock() {
     return (
@@ -22,7 +23,7 @@ function PizzaBlock() {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от 395 ₽</div>
-                <div className="button button--outline button--add">
+                <Button outline add>
                     <svg
                         width="12"
                         height="12"
@@ -36,7 +37,7 @@ function PizzaBlock() {
                     </svg>
                     <span>Добавить</span>
                     <i>2</i>
-                </div>
+                </Button>
             </div>
         </div>
     );

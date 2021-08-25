@@ -78,6 +78,8 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
+    background-color: transparent;
+    border: 0;
     @include noselect();
 
     span {
@@ -236,6 +238,7 @@ body {
         align-items: center;
         justify-content: center;
         width: 210px;
+        padding: 16px;
 
         border-color: darken($color: $gray-line, $amount: 10);
 
