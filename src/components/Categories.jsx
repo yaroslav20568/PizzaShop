@@ -20,4 +20,4 @@ const Categories = ({ categorieItems, activeCategorie, onClickCategorie }) => {
     );
 }
 
-export default Categories;
+export default React.memo(Categories);

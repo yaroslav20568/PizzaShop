@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPizzas, setCategorie, setSortBy } from '../redux/actions/importActions';
 import { Categories, SortPopup, PizzaBlock, PizzaLoader } from './../components/importComponents';
@@ -26,13 +26,13 @@ const Home = () => {
         dispatch(fetchPizzas(activeCategorie, activeSortBy));
     }, [activeCategorie, activeSortBy]);
 
-    const onSelectCategorie = index => {
-        dispatch(setCategorie(index));
-    };
+    const onSelectCategorie = useCallback(index => {
+        dispatch(setCategorie(index));    
+    }, []);
 
-    const onSelectSortBy = sortBy => {
+    const onSelectSortBy = useCallback(sortBy => {
         dispatch(setSortBy(sortBy));
-    };
+    }, []);
 
     return (
         <div className="container">
@@ -58,6 +58,6 @@ const Home = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Home;

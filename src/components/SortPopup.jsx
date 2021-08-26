@@ -61,6 +61,6 @@ const SortPopup = ({ sortPopupItems, activeSortBy, onClickSortBy }) => {
             }
         </div>
     );
-}
+};
 
-export default SortPopup;
+export default React.memo(SortPopup);
