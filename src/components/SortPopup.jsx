@@ -1,14 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const SortPopup = ({ sortPopupItems, activeSortBy, onSelectSortBy }) => {
+const SortPopup = ({ sortPopupItems, activeSortBy, onClickSortBy }) => {
     const sortByActiveIndex = sortPopupItems.findIndex(sortBy => JSON.stringify(activeSortBy) === JSON.stringify(sortBy));
-
+    const [visiblePopup, setVisiblePopup] = useState(false);
     const sortPopupRef = useRef();
 
+    const onSelectSortBy = (sortBy) => {
+        onClickSortBy(sortBy);
+        setVisiblePopup(false);
+    };
+
+    const toggleVisiblePopup = () => {
+        setVisiblePopup(!visiblePopup);
+    };
+
+    const handleClickOutside = (e) => {
+        if(!e.path.includes(sortPopupRef.current)) {
+            setVisiblePopup(false);
+        }
+    };
+
+    useEffect(() => {
+        document.body.addEventListener('click', handleClickOutside);
+    }, [])
+
     return (
-        <div className="sort">
+        <div className="sort" ref={sortPopupRef}>
             <div className="sort__label">
                 <svg
+                    className={visiblePopup ? 'active' : ''}
                     width="10"
                     height="6"
                     viewBox="0 0 10 6"
@@ -20,22 +40,25 @@ const SortPopup = ({ sortPopupItems, activeSortBy, onSelectSortBy }) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>{activeSortBy.name}</span>
+                <span onClick={toggleVisiblePopup}>{activeSortBy.name}</span>
             </div>
-            <div className="sort__popup">
-                <ul>
-                    {
-                        sortPopupItems && sortPopupItems.map((sortBy, index) => 
-                            <li 
-                                key={`sortBy_${index}`}
-                                className={sortByActiveIndex === index ? 'active' : ''}
-                                onClick={() => onSelectSortBy(sortBy)}
-                            >
-                                {sortBy.name}
-                            </li>)
-                    }
-                </ul>
-            </div>
+            {
+                visiblePopup && 
+                <div className="sort__popup">
+                    <ul>
+                        {
+                            sortPopupItems && sortPopupItems.map((sortBy, index) => 
+                                <li 
+                                    key={`sortBy_${index}`}
+                                    className={sortByActiveIndex === index ? 'active' : ''}
+                                    onClick={() => onSelectSortBy(sortBy)}
+                                >
+                                    {sortBy.name}
+                                </li>)
+                        }
+                    </ul>
+                </div>
+            }
         </div>
     );
 }

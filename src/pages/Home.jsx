@@ -40,12 +40,12 @@ const Home = () => {
                 <Categories 
                     categorieItems={categorieItems} 
                     activeCategorie={activeCategorie} 
-                    onSelectCategorie={onSelectCategorie} 
+                    onClickCategorie={onSelectCategorie} 
                 />
                 <SortPopup
                     sortPopupItems={sortPopupItems}
                     activeSortBy={activeSortBy}
-                    onSelectSortBy={onSelectSortBy}
+                    onClickSortBy={onSelectSortBy}
                 />
             </div>
             <h2 className="content__title">Все пиццы</h2>
