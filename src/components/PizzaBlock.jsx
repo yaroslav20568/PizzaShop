@@ -30,11 +30,11 @@ const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
                         typesArray.map((type, index) => 
                         <li 
                             key={`type_${index}`}
-                            onClick={() => onSelectType(index)}
                             className={classnames({
                                 'active': activeType === index,
                                 'disabled': !types.includes(index)
                             })}
+                            onClick={() => onSelectType(index)}
                         >
                             {type}
                         </li>)
@@ -45,11 +45,11 @@ const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
                         sizesArray.map((size, index) => 
                         <li 
                             key={`size_${index}`}
-                            onClick={() => onSelectSize(index)}
                             className={classnames({
                                 'active': activeSize === index,
                                 'disabled': !sizes.includes(size)
                             })}
+                            onClick={() => onSelectSize(index)}
                         >
                             {size} см.
                         </li>)

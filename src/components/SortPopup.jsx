@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
-const SortPopup = () => {
+const SortPopup = ({ sortPopupItems, activeSortBy, onSelectSortBy }) => {
+    const sortByActiveIndex = sortPopupItems.findIndex(sortBy => JSON.stringify(activeSortBy) === JSON.stringify(sortBy));
+
+    const sortPopupRef = useRef();
+
     return (
         <div className="sort">
             <div className="sort__label">
@@ -16,13 +20,20 @@ const SortPopup = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>популярности</span>
+                <span>{activeSortBy.name}</span>
             </div>
             <div className="sort__popup">
                 <ul>
-                    <li className="active">популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
+                    {
+                        sortPopupItems && sortPopupItems.map((sortBy, index) => 
+                            <li 
+                                key={`sortBy_${index}`}
+                                className={sortByActiveIndex === index ? 'active' : ''}
+                                onClick={() => onSelectSortBy(sortBy)}
+                            >
+                                {sortBy.name}
+                            </li>)
+                    }
                 </ul>
             </div>
         </div>

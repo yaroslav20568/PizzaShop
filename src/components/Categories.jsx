@@ -8,6 +8,7 @@ const Categories = ({ categorieItems, activeCategorie, onSelectCategorie }) => {
                 {
                     categorieItems && categorieItems.map((categorie, index) => 
                         <li
+                            key={`categorie_${index}`}
                             className={activeCategorie === index ? 'active' : ''}
                             onClick={() => onSelectCategorie(index)}
                         >

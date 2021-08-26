@@ -4,6 +4,11 @@ import { fetchPizzas, setCategorie, setSortBy } from '../redux/actions/importAct
 import { Categories, SortPopup, PizzaBlock, PizzaLoader } from './../components/importComponents';
 
 const categorieItems = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+const sortPopupItems = [
+    {name: 'популярности', type: 'rating', order: 'desc'},
+    {name: 'цене', type: 'price', order: 'desc'},
+    {name: 'алфавиту', type: 'name', order: 'asc'}
+];
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -18,8 +23,8 @@ const Home = () => {
     }));
 
     useEffect(() => {
-        dispatch(fetchPizzas(activeCategorie));
-    }, [activeCategorie]);
+        dispatch(fetchPizzas(activeCategorie, activeSortBy));
+    }, [activeCategorie, activeSortBy]);
 
     const onSelectCategorie = index => {
         dispatch(setCategorie(index));
@@ -37,7 +42,11 @@ const Home = () => {
                     activeCategorie={activeCategorie} 
                     onSelectCategorie={onSelectCategorie} 
                 />
-                <SortPopup />
+                <SortPopup
+                    sortPopupItems={sortPopupItems}
+                    activeSortBy={activeSortBy}
+                    onSelectSortBy={onSelectSortBy}
+                />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
