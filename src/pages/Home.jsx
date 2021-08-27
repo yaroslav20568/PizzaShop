@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPizzas, setCategorie, setSortBy } from '../redux/actions/importActions';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCategorie, setSortBy } from './../redux/actions/importActions';
 import { Categories, SortPopup, PizzaBlock, PizzaLoader } from './../components/importComponents';
 
 const categorieItems = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
@@ -10,22 +10,8 @@ const sortPopupItems = [
     {name: 'алфавиту', type: 'name', order: 'asc'}
 ];
 
-const Home = () => {
+const Home = ({ pizzas, isLoaded, activeCategorie, activeSortBy }) => {
     const dispatch = useDispatch();
-    const { pizzas, isLoaded } = useSelector(({ pizzas }) => ({
-        pizzas: pizzas.pizzas,
-        isLoaded: pizzas.isLoaded
-    }));
-
-    const { activeCategorie, activeSortBy } = useSelector(({ filter }) => ({
-        activeCategorie: filter.categorie,
-        activeSortBy: filter.sortBy
-    }));
-
-    useEffect(() => {
-        dispatch(fetchPizzas(activeCategorie, activeSortBy));
-    }, [activeCategorie, activeSortBy]);
-
     const onSelectCategorie = useCallback(index => {
         dispatch(setCategorie(index));    
     }, []);

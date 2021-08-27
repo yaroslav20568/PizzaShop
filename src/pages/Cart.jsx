@@ -92,7 +92,7 @@ const Cart = () => {
                             <p>тонкое тесто, 26 см.</p>
                         </div>
                         <div className="cart__item-count">
-                            <Button outline circle minus>
+                            <button className="button button--outline button--circle cart__item-count-minus">
                                 <svg
                                     width="10"
                                     height="10"
@@ -108,9 +108,9 @@ const Cart = () => {
                                         fill="#EB5A1E"
                                     />
                                 </svg>
-                            </Button>
+                            </button>
                             <b>2</b>
-                            <Button outline circle plus>
+                            <button className="button button--outline button--circle cart__item-count-plus">
                                 <svg
                                     width="10"
                                     height="10"
@@ -126,13 +126,13 @@ const Cart = () => {
                                         fill="#EB5A1E"
                                     />
                                 </svg>
-                            </Button>
+                            </button>
                         </div>
                         <div className="cart__item-price">
                             <b>770 ₽</b>
                         </div>
                         <div className="cart__item-remove">
-                            <Button outline circle>
+                            <button className="button button--outline button--circle">
                                 <svg
                                     width="10"
                                     height="10"
@@ -148,7 +148,7 @@ const Cart = () => {
                                         fill="#EB5A1E"
                                     />
                                 </svg>
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 </div>

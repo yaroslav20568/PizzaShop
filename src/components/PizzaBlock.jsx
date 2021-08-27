@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
-import { Button } from './importComponents';
+import { addPizzaToCart } from './../redux/actions/importActions';
 
-const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
+const PizzaBlock = ({ id, imageUrl, name, types, sizes, price }) => {
+    const dispatch = useDispatch();
     const typesArray = ['Тонкое', 'Традиционное'];
     const sizesArray = [26, 30, 40];
     const [activeType, setActiveType] = useState(types[0]);
@@ -15,6 +17,17 @@ const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
     const onSelectSize = index => {
         setActiveSize(index);
     };
+
+    const onAddPizzaToCart = () => {
+        dispatch(addPizzaToCart({
+            id,
+            imageUrl,
+            name,
+            type: typesArray[activeType],
+            size: sizesArray[activeSize],
+            price
+        }))
+    }
 
     return (
         <div className="pizza-block">
@@ -58,7 +71,7 @@ const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <Button outline add>
+                <button className="button button--outline button--add" onClick={onAddPizzaToCart}>
                     <svg
                         width="12"
                         height="12"
@@ -72,10 +85,10 @@ const PizzaBlock = ({ imageUrl, name, types, sizes, price }) => {
                     </svg>
                     <span>Добавить</span>
                     <i>2</i>
-                </Button>
+                </button>
             </div>
         </div>
     );
-}
+};
 
 export default PizzaBlock;
