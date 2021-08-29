@@ -15,7 +15,7 @@ const cart = (state = defaultState, action) => {
                     [...state.items[action.payload.id].items, action.payload] :
                     [action.payload];
 
-            const newItems = {
+            const itemsAfterAdd = {
                 ...state.items, 
                 [action.payload.id]: {
                     items: currentPizzaArray,
@@ -23,11 +23,11 @@ const cart = (state = defaultState, action) => {
                 }
             }
 
-            const itemsAddArray = [].concat.apply([], Object.values(newItems).map(obj => obj.items));
+            const itemsAddArray = [].concat.apply([], Object.values(itemsAfterAdd).map(obj => obj.items));
 
             return {
                 ...state,
-                items: newItems,
+                items: itemsAfterAdd,
                 totalPrice: sumTotalPrice(itemsAddArray),
                 totalPizzas: itemsAddArray.length
             }
@@ -39,16 +39,55 @@ const cart = (state = defaultState, action) => {
                 totalPizzas: 0
             }
         case 'REMOVE_PIZZA_FROM_CART':
-            delete state.items[action.payload];
-            const itemsAfterDelete = {...state.items};
-
-            const itemsRemoveArray = [].concat.apply([], Object.values(itemsAfterDelete).map(obj => obj.items));
+            const newItems = {...state.items};
+            const currentTotalPrice = newItems[action.payload].totalPrice;
+            const currentTotalPizzas = newItems[action.payload].items.length;
+            delete newItems[action.payload];
 
             return {
                 ...state,
-                items: itemsAfterDelete,
-                totalPrice: sumTotalPrice(itemsRemoveArray),
-                totalPizzas: itemsRemoveArray.length
+                items: newItems,
+                totalPrice: state.totalPrice - currentTotalPrice,
+                totalPizzas: state.totalPizzas - currentTotalPizzas
+            }
+        case 'MINUS_COUNT_PIZZA':
+            const oldItems = [...state.items[action.payload].items]
+            const currentPizzaArrayMinus = oldItems.length > 1 ?  [...state.items[action.payload].items.slice(1)] : oldItems;
+
+            const itemsAfterMinusCount = {
+                ...state.items, 
+                [action.payload]: {
+                    items: currentPizzaArrayMinus,
+                    totalPrice: sumTotalPrice(currentPizzaArrayMinus)
+                }
+            }
+
+            const itemsMinusArray = [].concat.apply([], Object.values(itemsAfterMinusCount).map(obj => obj.items));
+            
+            return {
+                ...state,
+                items: itemsAfterMinusCount,
+                totalPrice: sumTotalPrice(itemsMinusArray),
+                totalPizzas: itemsMinusArray.length
+            }
+        case 'PLUS_COUNT_PIZZA':
+            const currentPizzaArrayPlus = [state.items[action.payload].items[0], ...state.items[action.payload].items];
+            
+            const itemsAfterPlusCount = {
+                ...state.items, 
+                [action.payload]: {
+                    items: currentPizzaArrayPlus,
+                    totalPrice: sumTotalPrice(currentPizzaArrayPlus)
+                }
+            }
+            
+            const itemsPlusArray = [].concat.apply([], Object.values(itemsAfterPlusCount).map(obj => obj.items));
+            
+            return {
+                ...state,
+                items: itemsAfterPlusCount,
+                totalPrice: sumTotalPrice(itemsPlusArray),
+                totalPizzas: itemsPlusArray.length
             }
         default:
             return state;
