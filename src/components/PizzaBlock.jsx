@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
 import { addPizzaToCart } from './../redux/actions/importActions';
 
@@ -9,6 +9,10 @@ const PizzaBlock = ({ id, imageUrl, name, types, sizes, price }) => {
     const sizesArray = [26, 30, 40];
     const [activeType, setActiveType] = useState(types[0]);
     const [activeSize, setActiveSize] = useState(sizesArray.findIndex(size => size === sizes[0]));
+
+    const { items } = useSelector(({ cart } )=> ({
+        items: cart.items
+    }));
 
     const onSelectType = index => {
         setActiveType(index);
@@ -84,7 +88,7 @@ const PizzaBlock = ({ id, imageUrl, name, types, sizes, price }) => {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
+                    <i>{items[id] ? items[id].items.length : 0}</i>
                 </button>
             </div>
         </div>
