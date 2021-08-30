@@ -9,13 +9,17 @@ const cart = (state = defaultState, action) => {
         return array.reduce((acc, curVal) => acc + curVal.price, 0)
     };
 
+    const getItemsArray = (obj) => {
+        return [].concat.apply([], Object.values(obj).map(obj => obj.items));
+    };
+
     switch (action.type) {
-        case 'ADD_PIZZA_TO_CART':
+        case 'ADD_PIZZA_TO_CART': {
             const currentPizzaArray = state.items[action.payload.id] ? 
                     [...state.items[action.payload.id].items, action.payload] :
                     [action.payload];
 
-            const itemsAfterAdd = {
+            const newItems = {
                 ...state.items, 
                 [action.payload.id]: {
                     items: currentPizzaArray,
@@ -23,14 +27,15 @@ const cart = (state = defaultState, action) => {
                 }
             }
 
-            const itemsAddArray = [].concat.apply([], Object.values(itemsAfterAdd).map(obj => obj.items));
+            const itemsArray = getItemsArray(newItems);
 
             return {
                 ...state,
-                items: itemsAfterAdd,
-                totalPrice: sumTotalPrice(itemsAddArray),
-                totalPizzas: itemsAddArray.length
+                items: newItems,
+                totalPrice: sumTotalPrice(itemsArray),
+                totalPizzas: itemsArray.length
             }
+        }
         case 'CLEAR_CART':
             return {
                 ...state,
@@ -38,7 +43,7 @@ const cart = (state = defaultState, action) => {
                 totalPrice: 0,
                 totalPizzas: 0
             }
-        case 'REMOVE_PIZZA_FROM_CART':
+        case 'REMOVE_PIZZA_FROM_CART': {
             const newItems = {...state.items};
             const currentTotalPrice = newItems[action.payload].totalPrice;
             const currentTotalPizzas = newItems[action.payload].items.length;
@@ -50,45 +55,50 @@ const cart = (state = defaultState, action) => {
                 totalPrice: state.totalPrice - currentTotalPrice,
                 totalPizzas: state.totalPizzas - currentTotalPizzas
             }
-        case 'MINUS_COUNT_PIZZA':
-            const oldItems = [...state.items[action.payload].items]
-            const currentPizzaArrayMinus = oldItems.length > 1 ?  [...state.items[action.payload].items.slice(1)] : oldItems;
+        }
+        case 'MINUS_COUNT_PIZZA': {
+            const oldItems = [...state.items[action.payload].items];
+            const currentPizzaArray = oldItems.length > 1 ?  
+                [...state.items[action.payload].items.slice(0, state.items[action.payload].items.length - 1)] :
+                oldItems;
 
-            const itemsAfterMinusCount = {
+            const newItems = {
                 ...state.items, 
                 [action.payload]: {
-                    items: currentPizzaArrayMinus,
-                    totalPrice: sumTotalPrice(currentPizzaArrayMinus)
+                    items: currentPizzaArray,
+                    totalPrice: sumTotalPrice(currentPizzaArray)
                 }
             }
 
-            const itemsMinusArray = [].concat.apply([], Object.values(itemsAfterMinusCount).map(obj => obj.items));
+            const itemsArray = getItemsArray(newItems);
             
             return {
                 ...state,
-                items: itemsAfterMinusCount,
-                totalPrice: sumTotalPrice(itemsMinusArray),
-                totalPizzas: itemsMinusArray.length
+                items: newItems,
+                totalPrice: sumTotalPrice(itemsArray),
+                totalPizzas: itemsArray.length
             }
-        case 'PLUS_COUNT_PIZZA':
-            const currentPizzaArrayPlus = [state.items[action.payload].items[0], ...state.items[action.payload].items];
+        }
+        case 'PLUS_COUNT_PIZZA': {
+            const currentPizzaArray = [...state.items[action.payload].items, state.items[action.payload].items[state.items[action.payload].items.length - 1]];
             
-            const itemsAfterPlusCount = {
+            const newItems = {
                 ...state.items, 
                 [action.payload]: {
-                    items: currentPizzaArrayPlus,
-                    totalPrice: sumTotalPrice(currentPizzaArrayPlus)
+                    items: currentPizzaArray,
+                    totalPrice: sumTotalPrice(currentPizzaArray)
                 }
             }
             
-            const itemsPlusArray = [].concat.apply([], Object.values(itemsAfterPlusCount).map(obj => obj.items));
+            const itemsArray = getItemsArray(newItems);
             
             return {
                 ...state,
-                items: itemsAfterPlusCount,
-                totalPrice: sumTotalPrice(itemsPlusArray),
-                totalPizzas: itemsPlusArray.length
+                items: newItems,
+                totalPrice: sumTotalPrice(itemsArray),
+                totalPizzas: itemsArray.length
             }
+        }
         default:
             return state;
     }
