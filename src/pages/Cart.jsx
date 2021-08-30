@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Img from './../assets/img/empty-cart.png';
 import { clearCart } from './../redux/actions/importActions';
-import { Button, CartItem, EmptyCart } from './../components/importComponents';
+import { Button, CartItem } from './../components/importComponents';
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -97,7 +98,7 @@ const Cart = () => {
                                 <span>Очистить корзину</span>
                             </button>
                         </div>
-                        <div className="content__items">
+                        <div className="cart__items">
                             {
                                 cartItems.map((item, index) => 
                                     <CartItem 
@@ -145,10 +146,29 @@ const Cart = () => {
                             </div>
                         </div>
                     </div> :
-                    <EmptyCart />
+                    <div className="container container--cart">
+                        <div className="cart cart--empty">
+                            <h2>
+                                Корзина пустая
+                            </h2>
+                            <p>
+                                Вероятней всего, вы не заказывали ещё пиццу.
+                                <br />
+                                Для того, чтобы заказать пиццу, перейди на главную страницу.
+                            </p>
+                            <img src={Img} alt="Empty cart" />
+                            <Link to="/">
+                                <button href="/" className="button button--black">
+                                    <span>Вернуться назад</span>
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
             }
         </div>
     );
 }
 
 export default Cart;
+
+
