@@ -6,7 +6,7 @@ const setLoaded = (flag) => ({type: 'SET_LOADED', payload: flag});
 const fetchPizzas = (categorie, sortBy) => {
     return (dispatch) => {
         dispatch(setLoaded(false));
-        axios.get('https://localhost:3001/pizzas', {
+        axios.get('/pizzas', {
             params: {
                 category: categorie,
                 _sort: sortBy.type,
