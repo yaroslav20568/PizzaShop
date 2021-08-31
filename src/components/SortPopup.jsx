@@ -15,7 +15,8 @@ const SortPopup = ({ sortPopupItems, activeSortBy, onClickSortBy }) => {
     };
 
     const handleClickOutside = (e) => {
-        if(!e.path.includes(sortPopupRef.current)) {
+        const path = e.path || (e.composedPath && e.composedPath());
+        if(!path.includes(sortPopupRef.current)) {
             setVisiblePopup(false);
         }
     };

@@ -20,7 +20,7 @@ function App() {
     useEffect(() => {
         dispatch(fetchPizzas(activeCategorie, activeSortBy));
     }, [activeCategorie, activeSortBy]);
-
+    console.log('render app')
     return (
         <div className="wrapper">
             <Header />

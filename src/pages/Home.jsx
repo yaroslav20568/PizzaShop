@@ -21,7 +21,7 @@ const Home = ({ pizzas, isLoaded, activeCategorie, activeSortBy }) => {
     }, []);
 
     return (
-        <div className="container">
+        <div className="container container--home">
             <div className="content__top">
                 <Categories 
                     categorieItems={categorieItems} 

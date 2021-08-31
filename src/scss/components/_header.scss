@@ -1,6 +1,19 @@
 @import '../variables';
 
 .header {
+    animation: anim-header .4s ease forwards;
+    opacity: 0;
+    
+    @keyframes anim-header {
+        from {
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     border-bottom: 1px solid $gray-line;
     padding: 40px 0;
 

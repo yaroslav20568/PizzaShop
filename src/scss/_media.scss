@@ -9,8 +9,15 @@
 @media screen and (max-width: 1280px) {
     .content {
         &__top {
-            grid-template-columns: repeat(1, 1fr);
-            grid-gap: 15px 0;
+            display: block;
+        }
+
+        .categories {
+            margin-bottom: 15px;
+        }
+
+        .sort {
+            display: inline-block;
         }
     }
 }
@@ -276,7 +283,7 @@
 
         .content {
             &__title {
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
         }
     }
