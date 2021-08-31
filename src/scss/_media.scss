@@ -78,17 +78,24 @@
             padding-top: 20px;
             margin-top: 20px;
             
+            &-img {
+                margin-right: 0;
+                width: auto;
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+
             &-info {
                 width: auto;
                 align-items: center;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
 
             &-count {
                 justify-content: center;
                 width: auto;
                 grid-gap: 0 10px;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
 
             &-price {
@@ -99,12 +106,6 @@
             &-remove {
                 justify-content: center;
                 width: auto;
-            }
-
-            &-img {
-                margin-right: 0;
-                width: auto;
-                justify-content: center;
             }
         }
 
@@ -120,6 +121,12 @@
                 width: 200px;
                 height: 200px;
             }
+        }
+    }
+
+    .page-not-found {
+        h2 {
+            font-size: 28px;
         }
     }
 }
@@ -162,6 +169,22 @@
         &__bottom-details {
             span {
                 font-size: 20px;
+            }
+        }
+    }
+
+    .page-not-found {
+        svg {
+            width: 243px;
+            margin: 5px auto 15px;
+        }
+
+        .button--black {
+            width: 160px;
+            font-size: 15px;
+            padding: 10px 0 12px;
+            span {
+                font-size: 15px;
             }
         }
     }

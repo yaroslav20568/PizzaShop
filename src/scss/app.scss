@@ -316,4 +316,33 @@ body {
     }
 }
 
+.page-not-found {
+    text-align: center;
+
+    h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 145.4%;
+        letter-spacing: 0.01em;
+        color: #777;
+    }
+
+    svg {
+        display: block;
+        margin: 45px auto 60px;
+    }
+
+    .button--black {
+        padding: 12px 0 14px;
+        width: 230px;
+        margin: 0 auto;
+        font-weight: 600;
+        font-size: 18px;
+    }
+}
+
 @import 'media';

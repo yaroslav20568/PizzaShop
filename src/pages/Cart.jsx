@@ -135,7 +135,7 @@ const Cart = () => {
                                             />
                                         </svg>
 
-                                        <span>Вернуться назад</span>
+                                        <span>На главную</span>
                                     </Button>
                                 </Link>
                                 <Link to="/cart">
@@ -146,23 +146,21 @@ const Cart = () => {
                             </div>
                         </div>
                     </div> :
-                    <div className="container container--cart">
-                        <div className="cart cart--empty">
-                            <h2>
-                                Корзина пустая
-                            </h2>
-                            <p>
-                                Вероятней всего, вы не заказывали ещё пиццу.
-                                <br />
-                                Для того, чтобы заказать пиццу, перейди на главную страницу.
-                            </p>
-                            <img src={Img} alt="Empty cart" />
-                            <Link to="/">
-                                <button href="/" className="button button--black">
-                                    <span>Вернуться назад</span>
-                                </button>
-                            </Link>
-                        </div>
+                    <div className="cart cart--empty">
+                        <h2>
+                            Корзина пустая
+                        </h2>
+                        <p>
+                            Вероятней всего, вы не заказывали ещё пиццу.
+                            <br />
+                            Для того, чтобы заказать пиццу, перейди на главную страницу.
+                        </p>
+                        <img src={Img} alt="Empty cart" />
+                        <Link to="/">
+                            <button href="/" className="button button--black">
+                                <span>На главную</span>
+                            </button>
+                        </Link>
                     </div>
             }
         </div>
