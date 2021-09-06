@@ -12,6 +12,7 @@ const sortPopupItems = [
 
 const Home = ({ pizzas, isLoaded, activeCategorie, activeSortBy }) => {
     const dispatch = useDispatch();
+    
     const onSelectCategorie = useCallback(index => {
         dispatch(setCategorie(index));    
     }, []);

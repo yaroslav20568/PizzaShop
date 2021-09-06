@@ -1,18 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Img from './../assets/img/empty-cart.png';
 import { clearCart } from './../redux/actions/importActions';
 import { Button, CartItem } from './../components/importComponents';
 
-const Cart = () => {
+const Cart = ({ items, totalPrice, totalPizzas }) => {
     const dispatch = useDispatch();
-    const { items, totalPrice, totalPizzas } = useSelector(({ cart } )=> ({
-        items: cart.items,
-        totalPrice: cart.totalPrice,
-        totalPizzas: cart.totalPizzas
-    }));
-
     const cartItems = Object.values(items).map(obj => obj.items[obj.items.length - 1]);
 
     const onClearCart = () => {
@@ -167,6 +161,6 @@ const Cart = () => {
     );
 }
 
-export default Cart;
+export default React.memo(Cart);
 
 

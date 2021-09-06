@@ -71,13 +71,18 @@
 
     .categories {
         ul {
-            grid-template-columns: repeat(3, auto);
+            grid-template-columns: repeat(3, 1fr);
         }
     }
 
     .cart {
         h2, .content__title {
             font-size: 28px;
+        }
+
+        &__items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
         }
 
         &__item {
@@ -155,9 +160,10 @@
             }
     
             .button--black {
-                width: 160px;
+                width: 190px;
                 font-size: 15px;
-                padding: 10px 0 12px;
+                padding: 11px 0 13px;
+
                 span {
                     font-size: 15px;
                 }
@@ -165,9 +171,10 @@
         }
         
         .go-back-btn, .pay-btn {
-            width: 160px;
+            width: 190px;
             font-size: 15px;
-            padding: 10px 0 12px;
+            padding: 11px 0 13px;
+
             span {
                 font-size: 15px;
             }
@@ -187,9 +194,10 @@
         }
 
         .button--black {
-            width: 160px;
+            width: 200px;
             font-size: 15px;
-            padding: 10px 0 12px;
+            padding: 12px 0 14px;
+            
             span {
                 font-size: 15px;
             }
@@ -231,10 +239,16 @@
         }
     }
 
+    .cart {
+        &__items {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
     .button {
         &.button {
             &--cart {
-                padding: 8px 20px;
+                padding: 9px 54px;
             }
         }
     }
@@ -243,7 +257,7 @@
 @media screen and (max-width: 500px) {
     .categories {
         ul {
-            grid-template-columns: repeat(2, auto);
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
@@ -292,7 +306,7 @@
 @media screen and (max-width: 390px) {
     .categories {
         ul {
-            grid-template-columns: repeat(1, auto);
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 

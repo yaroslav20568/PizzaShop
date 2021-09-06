@@ -7,23 +7,25 @@ import { Home, Cart, PageNotFound } from './pages/importPages';
 
 function App() {
     const dispatch = useDispatch();
-    const { pizzas, isLoaded } = useSelector(({ pizzas }) => ({
+    const { pizzas, isLoaded, activeCategorie, activeSortBy, items, totalPrice, totalPizzas } = useSelector(({ pizzas, filter, cart }) => ({
         pizzas: pizzas.pizzas,
-        isLoaded: pizzas.isLoaded
-    }));
+        isLoaded: pizzas.isLoaded,
 
-    const { activeCategorie, activeSortBy } = useSelector(({ filter }) => ({
         activeCategorie: filter.categorie,
-        activeSortBy: filter.sortBy
+        activeSortBy: filter.sortBy,
+        
+        items: cart.items,
+        totalPrice: cart.totalPrice,
+        totalPizzas: cart.totalPizzas
     }));
 
     useEffect(() => {
         dispatch(fetchPizzas(activeCategorie, activeSortBy));
     }, [activeCategorie, activeSortBy]);
-    console.log('render app')
+
     return (
         <div className="wrapper">
-            <Header />
+            <Header totalPrice={totalPrice} totalPizzas={totalPizzas} />
             <div className="content">
                 <Switch>
                     <Route path="/" exact>
@@ -34,7 +36,13 @@ function App() {
                             activeSortBy={activeSortBy} 
                         />
                     </Route>
-                    <Route path="/cart" component={ Cart } exact />
+                    <Route path="/cart" exact>
+                        <Cart 
+                            items={items} 
+                            totalPrice={totalPrice} 
+                            totalPizzas={totalPizzas} 
+                        />
+                    </Route>
                     <Route component={ PageNotFound } exact />
                 </Switch>
             </div>
