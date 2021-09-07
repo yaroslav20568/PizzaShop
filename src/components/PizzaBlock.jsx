@@ -7,8 +7,12 @@ const PizzaBlock = ({ id, imageUrl, name, types, sizes, price }) => {
     const dispatch = useDispatch();
     const typesArray = ['Тонкое', 'Традиционное'];
     const sizesArray = [26, 30, 40];
-    const [activeType, setActiveType] = useState(types[0]);
-    const [activeSize, setActiveSize] = useState(sizesArray.findIndex(size => size === sizes[0]));
+    const [activeType, setActiveType] = useState(
+        JSON.parse(localStorage.getItem(`activeType=${id}`)) || types[0]
+    );
+    const [activeSize, setActiveSize] = useState(
+        JSON.parse(localStorage.getItem(`activeSize=${id}`)) || sizesArray.findIndex(size => size === sizes[0])
+    );
 
     const { items } = useSelector(({ cart } )=> ({
         items: cart.items
@@ -16,10 +20,12 @@ const PizzaBlock = ({ id, imageUrl, name, types, sizes, price }) => {
 
     const onSelectType = index => {
         setActiveType(index);
+        localStorage.setItem(`activeType=${id}`, index);
     };
 
     const onSelectSize = index => {
         setActiveSize(index);
+        localStorage.setItem(`activeSize=${id}`, index);
     };
 
     const onAddPizzaToCart = () => {
